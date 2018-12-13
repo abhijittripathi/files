@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="row">
+	<div class="units col-sm-4">
+		<div class="page-header">
+			<h3 class="list-header-main">
+					<span>units</span>
+					<span class="bar-space-main"></span>
+				</h3>
+			<ul class="list-chars">
+				{% for unit in units %}
+				<a href="{{url_for('showUnit', list_id = unit.id )}}">
+					<li class="title-chars">
+						<span class="name-char">{{unit.name}}</span>
+					</li>
+				</a>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="unit-chars col-sm-7">
+		<div class="cat-chars-list">
+			<h5 class="list-header-main">
+					<span>{{unitName}} ({{membersCount}} characters)</span>
+					<span class="bar-space-main"></span>
+				</h5>
+			<ul class="list-chars">
+				{% for member in members %}
+				<a href="{{url_for('showMember', list_id = member.unit_id ,char_id = member.id )}}">
+					<li class="title-chars">
+						<span class="name-char">{{member.name}}</span>
+					</li>
+				</a>
+				{% endfor %}
+
+							{% if 'username' in session %}
+							<a class="btn btn-primary btn-space" href="{{url_for('addMember')}}" role="button">Add Member/s</a> {% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
